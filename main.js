@@ -10,6 +10,8 @@ var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
 cardSection.addEventListener('click', buttonCheck)
+cardSection.addEventListener('keydown', enterKey)
+cardSection.addEventListener('focusout', textChange)
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
 
@@ -17,7 +19,7 @@ function appendCards(array) {
   cardArr = []
   array.forEach(function (obj) {
     newCard(obj);
-    let card = new Card(obj.id, obj.title, obj.caption, obj.image, obj.favorite);
+    const card = new Card(obj.id, obj.title, obj.caption, obj.image, obj.favorite);
     cardArr.push(card);
   })
 }
@@ -31,51 +33,79 @@ function createElement(e) {
 }
 
 function addCard(e) {
-  console.log(e.target.result);
-  console.log(title.innerText);
-  let card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
+  const card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
   cardArr.push(card)
   card.saveToStorage(cardArr);
   newCard(card);
 }
 
 function newCard(card) {
-  const cardSection = document.querySelector(".card-section");
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
       <section>
-        <h3 class="title">${card.title}</h3>
+        <h3 class="title" contenteditable="true">${card.title}</h3>
       </section>
       <section class="photo">
-        <img src="${card.image}">
+        <img class="image" src="${card.image}">
       </section>
       <section>
-        <p class="caption">${card.caption}</p>
+        <p class="caption" contenteditable="true">${card.caption}</p>
       </section>
       <section class="two-buttons">
         <div class="trash"></div>
-        <div class="heart"></div>
+        <div class="heart-${card.favorite.toString()}"></div>
       </section>
     </article>`);
 }
 
 function buttonCheck (e) {
   e.preventDefault();
-  let cardId = parseInt(event.target.parentElement.parentElement.id)
-  var targetButton = event.target.className
-  if (targetButton === 'trash') {
-    deleteCard(cardId);
+  const cardId = parseInt(e.target.parentElement.parentElement.id)
+  const index = cardArr.findIndex(card => card.id === cardId);
+  const targetButton = e.target.className
+  console.log(e.target.className);
+  if (targetButton === 'trash') deleteCard(cardId, index);
+  if (targetButton === 'heart-true' || targetButton === 'heart-false') {
+    favoriteUpdate(targetButton, index);
+  }
+  if (targetButton === 'title' || targetButton === 'caption') {
+    textChange(index, targetButton);
   }
 }
 
-function deleteCard(thisId) {
-  let index = cardArr.findIndex(card => card.id === thisId);
-  console.log(cardArr);
-  let wholeCard = document.getElementById(thisId.toString());
-  wholeCard.remove();
+function deleteCard(thisId, index) {
   cardArr[index].deleteFromStorage(index, cardArr);
+  const wholeCard = document.getElementById(thisId);
+  wholeCard.remove();
 }
 
+function favoriteUpdate (name, index) {
+  if (name === 'heart-false') {
+    event.target.classList.replace('heart-false','heart-true');
+    cardArr[index].updateCard(cardArr, true);
+  } else if (name === 'heart-true') {
+    event.target.classList.replace('heart-true', 'heart-false');
+    cardArr[index].updateCard(cardArr, false);
+  }
+}
+
+function enterKey (e) {
+  e.preventDefault();
+  const category = e.target.className
+  const key = event.keyCode;
+  if (key === 13) textChange(category);
+}
+
+function textChange(category, e) {
+  if (category === undefined) {
+    const category = e.target.className;
+    console.log(category);
+  }
+  // const category = e.target.className;
+  // const newText = event.target.innerText;
+  // console.log(e.target)
+  // card.updateCard(newText, category);
+}
 
 
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
