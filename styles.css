@@ -225,8 +225,7 @@ section .photo {
   background: url(assests/favorite.svg) right center no-repeat;
 }
 
-.heart-true,
-.heart-false:hover {
+.heart-true {
   background: url(assests/favorite-active.svg) right center no-repeat;
 }
 

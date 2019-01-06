@@ -5,13 +5,13 @@ var title = document.getElementById('title-input');
 var caption = document.getElementById('caption-input');
 var image = document.querySelector('.file-input');
 var cardSection = document.querySelector(".card-section");
-
+var card = document.querySelector('.card');
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
-cardSection.addEventListener('click', buttonCheck)
-cardSection.addEventListener('keydown', enterKey)
-cardSection.addEventListener('focusout', textChange)
+cardSection.addEventListener('click', buttonCheck);
+cardSection.addEventListener('keydown', enterKey);
+cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
 
@@ -43,13 +43,13 @@ function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
       <section>
-        <h3 class="title" contenteditable="true">${card.title}</h3>
+        <h3 contenteditable="true" class="title">${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
       <section>
-        <p class="caption" contenteditable="true">${card.caption}</p>
+        <p contenteditable="true" class="caption">${card.caption}</p>
       </section>
       <section class="two-buttons">
         <div class="trash"></div>
@@ -63,14 +63,14 @@ function buttonCheck (e) {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const targetButton = e.target.className
-  console.log(e.target.className);
+  // console.log(e.target.className);
   if (targetButton === 'trash') deleteCard(cardId, index);
   if (targetButton === 'heart-true' || targetButton === 'heart-false') {
     favoriteUpdate(targetButton, index);
   }
-  if (targetButton === 'title' || targetButton === 'caption') {
-    textChange(index, targetButton);
-  }
+  // if (targetButton === 'title' || targetButton === 'caption') {
+  //   textChange(targetButton);
+  // }
 }
 
 function deleteCard(thisId, index) {
@@ -91,19 +91,15 @@ function favoriteUpdate (name, index) {
 
 function enterKey (e) {
   e.preventDefault();
-  const category = e.target.className
   const key = event.keyCode;
-  if (key === 13) textChange(category);
+  if (key === 13) textChange(e);
 }
 
-function textChange(category, e) {
-  if (category === undefined) {
-    const category = e.target.className;
-    console.log(category);
-  }
-  // const category = e.target.className;
-  // const newText = event.target.innerText;
-  // console.log(e.target)
+function textChange(e) {
+  const category = e.target.className;
+  console.log(category);
+  const newText = event.target.innerText;
+  console.log(newText);
   // card.updateCard(newText, category);
 }
 
