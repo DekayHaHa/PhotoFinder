@@ -13,7 +13,8 @@ class Card {
     array.splice(index, 1);
     this.saveToStorage(array);
   }
-  updatePhoto () {
-
+  updateCard (array, boolean) {
+    this.favorite = boolean;
+    this.saveToStorage(array)
   }
 }

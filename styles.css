@@ -221,12 +221,12 @@ section .photo {
   background: url(assests/delete-active.svg) left center no-repeat;
 }
 
-.heart {
+.heart-false {
   background: url(assests/favorite.svg) right center no-repeat;
 }
 
-.favorited,
-.heart:hover {
+.heart-true,
+.heart-false:hover {
   background: url(assests/favorite-active.svg) right center no-repeat;
 }
 
