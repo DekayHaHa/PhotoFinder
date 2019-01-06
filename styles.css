@@ -1,0 +1,289 @@
+* {
+  font-family: Open Sans, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c2b2b4;
+}
+
+.display-mode-none {
+  display: none;
+}
+
+/* nav bar */
+header {
+  background-color: #3e2a35;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-title {
+  color: white;
+  font-weight: 800;
+  padding-left: 25px;
+  height: 1em;
+}
+
+header img {
+  height: 1em;
+  margin: auto 5px;
+}
+
+.search-form {
+  display: flex;
+  padding: 25px;
+}
+
+#search-input {
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+  color: #8A8494;
+  outline-color: #afa5cd;
+  width: 100%;
+}
+
+.search-button {
+  background-color: #C2C1C0;
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+.search-button:hover {
+  cursor: pointer;
+}
+
+.fa-search {
+  color: #FFFFFF;
+  padding: 6px;
+}
+
+/* create new card section */
+main {
+  background-color: #3e2a35;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+label {
+  color: #C1B2B4;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.photo-form {
+  grid-column: 2/3;
+  padding-top: 20px;
+}
+
+#title-input {
+  height: 4vh;
+  border-width: 1px; 
+}
+
+#caption-input {
+  height: 8vh;
+}
+
+.inputs {
+  border: solid 1px #d4d2d8;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  outline-color: #afa5cd;
+  width: 100%;
+}
+
+.buttons{
+  background-color: #5b4447;
+  border-radius: 5px;
+  border-style: solid;
+  color: #FFFFFF;
+  font-weight: 700;
+  height: 5vh;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding: 0px 5px;
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.choose-file {
+  width: 100%;
+}
+
+.file-label {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #5b4447;
+  border-radius: 5px;
+  border: 1px solid white;
+  color: #FFFFFF;
+  height: 5vh;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.file-label:hover {
+  cursor: pointer;
+  background-color: #938284;
+}
+
+.buttons:hover {
+  cursor: pointer;
+  background-color: #938284;
+}
+
+.create-button:disabled {
+  background-color: #808080;
+}
+
+/*.reset-button {
+  background-color: #afa5cd;
+  width: 25%;
+}*/
+
+.button-corral {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0px;
+}
+/* card section */
+
+.card-section {
+  display: flex;
+  /*column-gap: 20px*/
+  /*justify-content: space-between;*/
+  padding: 0px 45px;
+  margin: 20px;
+}
+
+.card {
+  height: 100px;
+  width: 23%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: solid 2px #d4d2d8; 
+  height: auto;
+}
+
+.card-section section {
+  padding: 5px;
+}
+
+.card h3 {
+  height: 30px;
+  font-size: 1.5em;
+}
+
+section .photo {
+  margin: -5px;
+}
+.photo img {
+  max-width:100%;
+  max-height:100%;
+}
+
+.caption {
+  height: 50px;
+}
+
+.two-buttons {
+  display: flex;
+  height: 50px;
+  background-color: #5b4447;
+}
+
+.two-buttons div {
+  width: 50%;
+}
+
+.trash {
+  background: url(assests/delete.svg) left center no-repeat;
+}
+
+.trash:hover {
+  background: url(assests/delete-active.svg) left center no-repeat;
+}
+
+.heart {
+  background: url(assests/favorite.svg) right center no-repeat;
+}
+
+.favorited,
+.heart:hover {
+  background: url(assests/favorite-active.svg) right center no-repeat;
+}
+
+
+/*
+
+.title {
+  color: #6E646B;
+  font-weight: 800;
+  outline: none;
+  padding: 10px 0px 0px 10px;
+  height: 38px;
+  overflow: scroll;
+}
+
+.quality-text {
+  color: #6E646B;
+  font-weight: 600;
+}
+
+.body {
+  color: #7C7879;
+  font-weight: 300;
+  margin: 10px;
+  max-height: 36px;
+  outline: none;
+  overflow: scroll;
+  padding: 1px;
+  height: 55px;
+}
+
+
+.vote {
+  align-items: center;
+  display: flex;
+}
+
+.delete, 
+.downvote, 
+.upvote {
+  height: 18px;
+  margin-right: 10px;
+  width: 18px;
+}
+
+.delete {
+  align-items: center;
+}
+
+.downvote {
+  margin-left: 10px;
+}
+
+.delete:hover, 
+.downvote:hover, 
+.upvote:hover {
+  cursor: pointer;
+}
+
+*/
