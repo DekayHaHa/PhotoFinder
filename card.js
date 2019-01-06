@@ -9,12 +9,13 @@ class Card {
   saveToStorage (array) {
     localStorage.setItem("cards", JSON.stringify(array));
   }
-  deleteFromStorage (index, array) {
-    array.splice(index, 1);
-    this.saveToStorage(array);
+  deleteFromStorage (index) {
+    cardArr.splice(index, 1);
+    this.saveToStorage(cardArr);
   }
-  updateCard (array, boolean) {
+  updateCard (boolean) {
     this.favorite = boolean;
-    this.saveToStorage(array)
+    this.saveToStorage(cardArr)
+    console.log(cardArr)
   }
 }

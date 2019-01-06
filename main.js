@@ -5,7 +5,7 @@ var title = document.getElementById('title-input');
 var caption = document.getElementById('caption-input');
 var image = document.querySelector('.file-input');
 var cardSection = document.querySelector(".card-section");
-var card = document.querySelector('.card');
+var search = document.getElementById('search-input');
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
@@ -14,6 +14,7 @@ cardSection.addEventListener('keydown', enterKey);
 cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
+search.addEventListener('keyup', searchFilter);
 
 function appendCards(array) {
   cardArr = []
@@ -42,13 +43,13 @@ function addCard(e) {
 function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
-      <section>
+      <section contenteditable="true">
         <h3 contenteditable="true" class="title">${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
-      <section>
+      <section contenteditable="true">
         <p contenteditable="true" class="caption">${card.caption}</p>
       </section>
       <section class="two-buttons">
@@ -56,6 +57,10 @@ function newCard(card) {
         <div class="heart-${card.favorite.toString()}"></div>
       </section>
     </article>`);
+}
+
+function clearCards () {
+  cardSection.innerHTML = "";
 }
 
 function buttonCheck (e) {
@@ -96,13 +101,31 @@ function enterKey (e) {
 }
 
 function textChange(e) {
+  e.preventDefault();
+  const cardId = parseInt(e.target.parentElement.id)
+  const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
-  console.log(category);
+  // console.log(cardId);
   const newText = event.target.innerText;
-  console.log(newText);
-  // card.updateCard(newText, category);
+  // console.log(newText);
+  cardArr[index].updateCard(newText, category);
 }
 
+function searchFilter (e) {
+  let inputText = e.target.value;
+  inputText = inputText.toLowerCase();
+  let filteredArray = cardArr.filter(function(card) {
+    if (card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText)) {
+      return card;
+    }
+  })
+  clearCards();
+  filteredCards(filteredArray);
+}
+
+function filteredCards (array) {
+  array.forEach(card => newCard(card));
+}
 
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
 // document.querySelector('.filter-buttons-section').addEventListener('click', buttonDetect);
