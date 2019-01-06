@@ -13,9 +13,8 @@ class Card {
     cardArr.splice(index, 1);
     this.saveToStorage(cardArr);
   }
-  updateCard (boolean) {
-    this.favorite = boolean;
-    this.saveToStorage(cardArr)
-    console.log(cardArr)
+  updateCard (para1, para2) {
+    para2 === undefined ? this.favorite = para1 : this[para2] = para1;
+    this.saveToStorage(cardArr);
   }
 }

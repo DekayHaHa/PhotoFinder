@@ -43,13 +43,13 @@ function addCard(e) {
 function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
-      <section contenteditable="true">
+      <section>
         <h3 contenteditable="true" class="title">${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
-      <section contenteditable="true">
+      <section>
         <p contenteditable="true" class="caption">${card.caption}</p>
       </section>
       <section class="two-buttons">
@@ -87,10 +87,10 @@ function deleteCard(thisId, index) {
 function favoriteUpdate (name, index) {
   if (name === 'heart-false') {
     event.target.classList.replace('heart-false','heart-true');
-    cardArr[index].updateCard(cardArr, true);
+    cardArr[index].updateCard(true);
   } else if (name === 'heart-true') {
     event.target.classList.replace('heart-true', 'heart-false');
-    cardArr[index].updateCard(cardArr, false);
+    cardArr[index].updateCard(false);
   }
 }
 
@@ -102,12 +102,12 @@ function enterKey (e) {
 
 function textChange(e) {
   e.preventDefault();
-  const cardId = parseInt(e.target.parentElement.id)
+  const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
   // console.log(cardId);
   const newText = event.target.innerText;
-  // console.log(newText);
+  console.log(category, newText);
   cardArr[index].updateCard(newText, category);
 }
 
