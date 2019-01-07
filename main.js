@@ -150,13 +150,8 @@ function searchFilter (e) {
 
 function showButton (e) {
   e.preventDefault();
-  if (show.innerText === "Show More") {
-    showCards(cardArr);
-    show.innerText = "Show Less";
-  } else {
-    checkTen();
-    show.innerText = "Show More";
-  }
+  show.innerText === "Show More" ? showCards(cardArr) : checkTen();
+  show.innerText === "Show More" ? show.innerText = "Show Less" : show.innerText = "Show More";
 }
 
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
