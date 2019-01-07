@@ -7,9 +7,11 @@ var image = document.querySelector('.file-input');
 var cardSection = document.querySelector(".card-section");
 var search = document.getElementById('search-input');
 var show = document.querySelector('.show');
+var favorites = document.querySelector('.favorites');
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
+favorites.addEventListener('click', favoriteFilter);
 cardSection.addEventListener('click', buttonCheck);
 cardSection.addEventListener('keydown', enterKey);
 cardSection.addEventListener('focusout', textChange);
@@ -57,13 +59,13 @@ function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
       <section>
-        <h3 class="title" contenteditable='true'>${card.title}</h3>
+        <h3 class="title" contenteditable="true">${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
       <section>
-        <p class="caption" contenteditable='true'>${card.caption}</p>
+        <p class="caption" contenteditable="true">${card.caption}</p>
       </section>
       <section class="two-buttons">
         <div class="trash"></div>
@@ -105,9 +107,12 @@ function favoriteUpdate (name, index) {
   favoriteAmount();
 }
 
-function favoriteFilter () {
+function favoriteFilter (e) {
+  e.preventDefault();
   const favoriteArray = cardArr.filter(card => card.favorite === true);
-  filteredCards(favoriteArray);
+  showCards(favoriteArray);
+  console.log(e.target.innerText.contains("favorites"))
+  // favorites === 
 }
  
 function favoriteAmount () {
@@ -127,7 +132,7 @@ function enterKey (e) {
 }
 
 function textChange (e) {
-  // e.preventDefault();
+  e.preventDefault();
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
@@ -145,7 +150,7 @@ function searchFilter (e) {
       return card;
     }
   })
-  filteredCards(filteredArray);
+  showCards(filteredArray);
 }
 
 function showButton (e) {
