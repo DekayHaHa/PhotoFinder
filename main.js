@@ -11,6 +11,7 @@ var favorites = document.querySelector('.favorites');
 
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
+var favoriteArray = [];
 
 favorites.addEventListener('click', favoriteFilter);
 cardSection.addEventListener('click', buttonCheck);
@@ -18,7 +19,7 @@ cardSection.addEventListener('keydown', enterKey);
 cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
-search.addEventListener('keyup', searchFilter);
+search.addEventListener('keyup', detectArray);
 show.addEventListener('click', showButton);
 title.addEventListener('keyup', enableButton);
 input.addEventListener('change', enableButton);
@@ -115,11 +116,13 @@ function favoriteUpdate (name, index) {
 
 function favoriteFilter (e) {
   e.preventDefault();
-  const favoriteArray = cardArr.filter(card => card.favorite === true);
+  favoriteArray = cardArr.filter(card => card.favorite === true);
   showCards(favoriteArray);
   if (favorites.innerText[8]) {
     favorites.innerText = "Show All";
+    show.disabled = true;
   } else {
+    show.disabled = false;
     favoriteAmount(), checkTen();
   }
 }
@@ -146,10 +149,21 @@ function textChange (e) {
   cardArr[index].updateCard(newText, category);
 }
 
-function searchFilter (e) {
+function detectArray (e) {
   e.preventDefault();
+  let arrayToFilter = [];
+  if (favorites.innerText === "Show All") {
+    arrayToFilter = favoriteArray;
+  } else {
+    arrayToFilter = cardArr;
+  }
+  searchFilter(arrayToFilter, e);
+}
+
+function searchFilter (array, e) {
+  // favorites.innerText === "Show All" ? arrayToFilter = favoriteArray : arrayToFilter = cardArr;
   let inputText = e.target.value.toLowerCase();
-  let filteredArray = cardArr.filter(function(card) {
+  let filteredArray = array.filter(function(card) {
       return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
   })
   showCards(filteredArray);

@@ -156,6 +156,11 @@ label {
   background-color: #808080;
 }
 
+.show:disabled {
+  background-color: #808080;
+}
+
+
 /*.reset-button {
   background-color: #afa5cd;
   width: 25%;
