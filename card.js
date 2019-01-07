@@ -4,17 +4,17 @@ class Card {
     this.title = title;
     this.caption = caption;
     this.image = image;
-    this.favorite = false;
+    this.favorite = favorite || false;
   }
   saveToStorage (array) {
     localStorage.setItem("cards", JSON.stringify(array));
   }
-  deleteFromStorage (index, array) {
-    array.splice(index, 1);
-    this.saveToStorage(array);
+  deleteFromStorage (index) {
+    cardArr.splice(index, 1);
+    this.saveToStorage(cardArr);
   }
-  updateCard (array, boolean) {
-    this.favorite = boolean;
-    this.saveToStorage(array)
+  updateCard (para1, para2) {
+    para2 === undefined ? this.favorite = para1 : this[para2] = para1;
+    this.saveToStorage(cardArr);
   }
 }
