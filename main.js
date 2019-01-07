@@ -111,8 +111,12 @@ function favoriteFilter (e) {
   e.preventDefault();
   const favoriteArray = cardArr.filter(card => card.favorite === true);
   showCards(favoriteArray);
-  console.log(e.target.classList)
-  // favorites.contains("View") ? console.log("Working"): console.log("Not Working");
+  if (favorites.innerText[8]) {
+    favorites.innerText = "Show All";
+  } else {
+    favoriteAmount();
+    checkTen();
+  }
 }
  
 function favoriteAmount () {
@@ -120,7 +124,7 @@ function favoriteAmount () {
   cardArr.forEach(card =>{
     if (card.favorite === true) amount++;
   })
-  document.querySelector('.favorite-amount').innerText = amount;
+  favorites.innerText = `View ${amount} Favorites`;
 }
 
 function enterKey (e) {
@@ -129,6 +133,8 @@ function enterKey (e) {
   if (key === 13) textChange(e);
 }
 
+/////////////FFFFFIIIIIIIIIIXXXXXXXXX\\\\\\\\\\\\\\
+/////////////GARBAGE FIRE!!!!!!!!!!!!\\\\\\\\\\\\\\
 function textChange (e) {
   e.preventDefault();
   const cardId = parseInt(e.target.parentElement.parentElement.id)
@@ -143,7 +149,7 @@ function textChange (e) {
 function searchFilter (e) {
   let inputText = e.target.value.toLowerCase();
   let filteredArray = cardArr.filter(function(card) {
-      return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText)
+      return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
   })
   showCards(filteredArray);
 }
@@ -153,6 +159,7 @@ function showButton (e) {
   show.innerText === "Show More" ? showCards(cardArr) : checkTen();
   show.innerText === "Show More" ? show.innerText = "Show Less" : show.innerText = "Show More";
 }
+
 
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
 // document.querySelector('.filter-buttons-section').addEventListener('click', buttonDetect);
