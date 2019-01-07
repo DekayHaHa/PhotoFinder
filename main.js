@@ -119,7 +119,7 @@ function favoriteAmount () {
   let amount = 0;
   cardArr.forEach(card =>{
     if (card.favorite === true) {
-      amount++
+      amount++;
     }
   })
   document.querySelector('.favorite-amount').innerText = amount;
@@ -143,12 +143,9 @@ function textChange (e) {
 }
 
 function searchFilter (e) {
-  let inputText = e.target.value;
-  inputText = inputText.toLowerCase();
+  let inputText = e.target.value.toLowerCase();
   let filteredArray = cardArr.filter(function(card) {
-    if (card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText)) {
-      return card;
-    }
+      return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText)
   })
   showCards(filteredArray);
 }
