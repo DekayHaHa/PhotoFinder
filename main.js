@@ -23,6 +23,7 @@ function appendCards(array) {
     const card = new Card(obj.id, obj.title, obj.caption, obj.image, obj.favorite);
     cardArr.push(card);
   })
+  favoriteAmount();
 }
 
 function createElement(e) {
@@ -44,13 +45,13 @@ function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
       <section>
-        <h3 contenteditable="true" class="title">${card.title}</h3>
+        <h3 class="title">${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
       <section>
-        <p contenteditable="true" class="caption">${card.caption}</p>
+        <p class="caption">${card.caption}</p>
       </section>
       <section class="two-buttons">
         <div class="trash"></div>
@@ -60,7 +61,7 @@ function newCard(card) {
 }
 
 function clearCards () {
-  cardSection.innerHTML = "";
+  cardSection.innerHTML = '';
 }
 
 function buttonCheck (e) {
@@ -68,14 +69,10 @@ function buttonCheck (e) {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const targetButton = e.target.className
-  // console.log(e.target.className);
   if (targetButton === 'trash') deleteCard(cardId, index);
   if (targetButton === 'heart-true' || targetButton === 'heart-false') {
     favoriteUpdate(targetButton, index);
   }
-  // if (targetButton === 'title' || targetButton === 'caption') {
-  //   textChange(targetButton);
-  // }
 }
 
 function deleteCard(thisId, index) {
@@ -92,6 +89,22 @@ function favoriteUpdate (name, index) {
     event.target.classList.replace('heart-true', 'heart-false');
     cardArr[index].updateCard(false);
   }
+  favoriteAmount();
+}
+
+function favoriteFilter () {
+  const favoriteArray = cardArr.filter(card => card.favorite === true);
+  filteredCards(favoriteArray);
+}
+ 
+function favoriteAmount () {
+  let amount = 0;
+  cardArr.forEach(card =>{
+    if (card.favorite === true) {
+      amount++
+    }
+  })
+  document.querySelector('.favorite-amount').innerText = amount;
 }
 
 function enterKey (e) {
@@ -119,11 +132,11 @@ function searchFilter (e) {
       return card;
     }
   })
-  clearCards();
   filteredCards(filteredArray);
 }
 
 function filteredCards (array) {
+  clearCards();
   array.forEach(card => newCard(card));
 }
 

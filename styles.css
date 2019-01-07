@@ -167,19 +167,20 @@ label {
 
 .card-section {
   display: flex;
-  /*column-gap: 20px*/
-  /*justify-content: space-between;*/
+  flex-wrap: wrap;
+  column-gap: 50px;
   padding: 0px 45px;
-  margin: 20px;
+  margin: 20px 0px 20px 20px;
 }
 
 .card {
-  height: 100px;
+  margin: 0px 20px 20px 0px;
   width: 23%;
   background-color: #FFFFFF;
   border-radius: 5px;
   border: solid 2px #d4d2d8; 
   height: auto;
+  min-width: 230px;
 }
 
 .card-section section {

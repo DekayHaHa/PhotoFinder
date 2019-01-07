@@ -4,7 +4,7 @@ class Card {
     this.title = title;
     this.caption = caption;
     this.image = image;
-    this.favorite = false;
+    this.favorite = favorite || false;
   }
   saveToStorage (array) {
     localStorage.setItem("cards", JSON.stringify(array));
