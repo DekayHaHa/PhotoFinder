@@ -6,6 +6,7 @@ var caption = document.getElementById('caption-input');
 var image = document.querySelector('.file-input');
 var cardSection = document.querySelector(".card-section");
 var search = document.getElementById('search-input');
+var show = document.querySelector('.show');
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
@@ -15,15 +16,26 @@ cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
 search.addEventListener('keyup', searchFilter);
+show.addEventListener('click', showButton)
 
 function appendCards(array) {
   cardArr = []
   array.forEach(function (obj) {
-    newCard(obj);
     const card = new Card(obj.id, obj.title, obj.caption, obj.image, obj.favorite);
     cardArr.push(card);
   })
+  checkTen();
+}
+
+function checkTen () {
+  const tenArray = cardArr.slice(-10);
   favoriteAmount();
+  showCards(tenArray);
+}
+
+function showCards (array) {
+  clearCards();
+  array.forEach(card => newCard(card));
 }
 
 function createElement(e) {
@@ -38,20 +50,20 @@ function addCard(e) {
   const card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
   cardArr.push(card)
   card.saveToStorage(cardArr);
-  newCard(card);
+  checkTen();
 }
 
 function newCard(card) {
   cardSection.insertAdjacentHTML('afterbegin',
     `<article class="card" id="${card.id}">
       <section>
-        <h3 class="title">${card.title}</h3>
+        <h3 class="title" contenteditable='true'>${card.title}</h3>
       </section>
       <section class="photo">
         <img class="image" src="${card.image}">
       </section>
       <section>
-        <p class="caption">${card.caption}</p>
+        <p class="caption" contenteditable='true'>${card.caption}</p>
       </section>
       <section class="two-buttons">
         <div class="trash"></div>
@@ -76,9 +88,10 @@ function buttonCheck (e) {
 }
 
 function deleteCard(thisId, index) {
-  cardArr[index].deleteFromStorage(index, cardArr);
+  cardArr[index].deleteFromStorage(index);
   const wholeCard = document.getElementById(thisId);
   wholeCard.remove();
+  checkTen();
 }
 
 function favoriteUpdate (name, index) {
@@ -113,13 +126,13 @@ function enterKey (e) {
   if (key === 13) textChange(e);
 }
 
-function textChange(e) {
-  e.preventDefault();
+function textChange (e) {
+  // e.preventDefault();
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
   // console.log(cardId);
-  const newText = event.target.innerText;
+  let newText = event.target.innerText;
   console.log(category, newText);
   cardArr[index].updateCard(newText, category);
 }
@@ -135,9 +148,15 @@ function searchFilter (e) {
   filteredCards(filteredArray);
 }
 
-function filteredCards (array) {
-  clearCards();
-  array.forEach(card => newCard(card));
+function showButton (e) {
+  e.preventDefault();
+  if (show.innerText === "Show More") {
+    showCards(cardArr);
+    show.innerText = "Show Less";
+  } else {
+    checkTen();
+    show.innerText = "Show More";
+  }
 }
 
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
