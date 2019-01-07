@@ -210,8 +210,9 @@ section .photo {
   background-color: #5b4447;
 }
 
-.two-buttons div {
+.two-buttons button {
   width: 50%;
+  border: none;
 }
 
 .trash {

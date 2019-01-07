@@ -68,8 +68,8 @@ function newCard(card) {
         <p class="caption" contenteditable="true">${card.caption}</p>
       </section>
       <section class="two-buttons">
-        <div class="trash"></div>
-        <div class="heart-${card.favorite.toString()}"></div>
+        <button class="trash"></button>
+        <button class="heart-${card.favorite.toString()}"></button>
       </section>
     </article>`);
 }
