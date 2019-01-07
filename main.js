@@ -8,6 +8,7 @@ var cardSection = document.querySelector(".card-section");
 var search = document.getElementById('search-input');
 var show = document.querySelector('.show');
 var favorites = document.querySelector('.favorites');
+
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 
@@ -18,7 +19,9 @@ cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
 search.addEventListener('keyup', searchFilter);
-show.addEventListener('click', showButton)
+show.addEventListener('click', showButton);
+title.addEventListener('keyup', enableButton);
+input.addEventListener('change', enableButton);
 
 function appendCards(array) {
   cardArr = []
@@ -31,8 +34,7 @@ function appendCards(array) {
 
 function checkTen () {
   const tenArray = cardArr.slice(-10);
-  favoriteAmount();
-  showCards(tenArray);
+  favoriteAmount(), showCards(tenArray);
 }
 
 function showCards (array) {
@@ -53,6 +55,10 @@ function addCard(e) {
   cardArr.push(card)
   card.saveToStorage(cardArr);
   checkTen();
+  title.value = '';
+  caption.value = '';
+  input.value = '';
+  enableButton();
 }
 
 function newCard(card) {
@@ -83,6 +89,7 @@ function buttonCheck (e) {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const targetButton = e.target.className
+  // console.log(targetButton);
   if (targetButton === 'trash') deleteCard(cardId, index);
   if (targetButton === 'heart-true' || targetButton === 'heart-false') {
     favoriteUpdate(targetButton, index);
@@ -92,8 +99,7 @@ function buttonCheck (e) {
 function deleteCard(thisId, index) {
   cardArr[index].deleteFromStorage(index);
   const wholeCard = document.getElementById(thisId);
-  wholeCard.remove();
-  checkTen();
+  wholeCard.remove(), checkTen();
 }
 
 function favoriteUpdate (name, index) {
@@ -114,8 +120,7 @@ function favoriteFilter (e) {
   if (favorites.innerText[8]) {
     favorites.innerText = "Show All";
   } else {
-    favoriteAmount();
-    checkTen();
+    favoriteAmount(), checkTen();
   }
 }
  
@@ -128,25 +133,21 @@ function favoriteAmount () {
 }
 
 function enterKey (e) {
-  e.preventDefault();
   const key = event.keyCode;
   if (key === 13) textChange(e);
 }
 
-/////////////FFFFFIIIIIIIIIIXXXXXXXXX\\\\\\\\\\\\\\
-/////////////GARBAGE FIRE!!!!!!!!!!!!\\\\\\\\\\\\\\
 function textChange (e) {
   e.preventDefault();
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
-  // console.log(cardId);
   let newText = event.target.innerText;
-  console.log(category, newText);
   cardArr[index].updateCard(newText, category);
 }
 
 function searchFilter (e) {
+  e.preventDefault();
   let inputText = e.target.value.toLowerCase();
   let filteredArray = cardArr.filter(function(card) {
       return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
@@ -160,7 +161,13 @@ function showButton (e) {
   show.innerText === "Show More" ? show.innerText = "Show Less" : show.innerText = "Show More";
 }
 
+function enableButton() {
+  const titleLen = title.value.length;
+  titleLen && input.files[0] ? create.disabled = false : create.disabled = true;
+}
 
+//14
+//
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
 // document.querySelector('.filter-buttons-section').addEventListener('click', buttonDetect);
 // window.addEventListener("load", cardPersist);
