@@ -111,16 +111,14 @@ function favoriteFilter (e) {
   e.preventDefault();
   const favoriteArray = cardArr.filter(card => card.favorite === true);
   showCards(favoriteArray);
-  console.log(e.target.innerText.contains("favorites"))
-  // favorites === 
+  console.log(e.target.classList)
+  // favorites.contains("View") ? console.log("Working"): console.log("Not Working");
 }
  
 function favoriteAmount () {
   let amount = 0;
   cardArr.forEach(card =>{
-    if (card.favorite === true) {
-      amount++;
-    }
+    if (card.favorite === true) amount++;
   })
   document.querySelector('.favorite-amount').innerText = amount;
 }
