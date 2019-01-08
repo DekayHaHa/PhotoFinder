@@ -183,31 +183,21 @@ function showButton (e) {
 function enableButton(e) {
   const titleLen = title.value.length;
   titleLen && input.files[0] ? create.disabled = false : create.disabled = true;
-  if (e.target.id === 'title-input') h3Count(e); 
+  if (e && e.target.id === 'title-input') h3Count(e); 
 }
 
 function h3Count (e) {
-  let length = e.target.value.length
+  let length = e.target.value.length;
   length > 0 ? titleCount.innerText = ` | Character Count ${length}` : titleCount.innerText = '';
-  if (length > 18) {
-    titleCount.classList.add('over');
-    create.disabled = true;
-  } else {
-    titleCount.classList.remove('over');
-    // create.disabled = false;
-  }
+  length > 18 ? titleCount.classList.add('over') : titleCount.classList.remove('over');
+  if (length > 18) create.disabled = true;
 }
 
 function pCount (e) {
-  let length = e.target.value.length
+  let length = e.target.value.length;
   length > 0 ? captionCount.innerText = ` | Character Count ${length}` : captionCount.innerText = '';
-  if (length > 60) {
-    captionCount.classList.add('over');
-    create.disabled = true;
-  } else {
-    captionCount.classList.remove('over');
-    // create.disabled = false;
-  }
+  length > 60 ? captionCount.classList.add('over') : captionCount.classList.remove('over');
+  if (length > 60) create.disabled = true;
 }
 
 //14
