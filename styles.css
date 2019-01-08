@@ -69,7 +69,8 @@ header img {
 main {
   background-color: #3e2a35;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: .75fr 3fr .75fr;
+  padding: 0px 45px;
 }
 
 label {
@@ -89,7 +90,7 @@ label {
 }
 
 #caption-input {
-  height: 8vh;
+  height: 6vh;
 }
 
 .over {
@@ -99,7 +100,7 @@ label {
 .inputs {
   border: solid 1px #d4d2d8;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   margin-top: 5px;
   outline-color: #afa5cd;
   width: 100%;
@@ -115,6 +116,8 @@ label {
   letter-spacing: 1px;
   margin-bottom: 20px;
   padding: 0px 5px;
+  font-size: .75em;
+  width: 33%;
 }
 
 .file-input {
@@ -126,9 +129,6 @@ label {
   z-index: -1;
 }
 
-.button-corral button {
-  width: 33%;
-}
 .choose-file {
   width: 100%;
 }
@@ -144,6 +144,7 @@ label {
   height: 5vh;
   letter-spacing: 1px;
   margin-bottom: 20px;
+  font-size: .75em;
 }
 
 .file-label:hover {
@@ -173,26 +174,33 @@ label {
 .button-corral {
   display: flex;
   justify-content: space-between;
-  padding: 4px 0px;
 }
 /* card section */
+
 .card-section h2 {
   margin: auto;
 }
+
 .card-section {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 50px;
+  display: grid;
+  justify-content: center;
+  grid-gap: 20px 20px;
+  grid-template-columns: repeat(auto-fit, 230px);
+  grid-template-rows: auto;
+
+/*  display: flex;
+  flex-wrap: wrap;*/
+  /*grid-row-gap: 20px;*/
   padding: 0px 45px;
-  margin: 20px 0px 20px 20px;
+  margin: 20px 0px 20px 0px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0px 20px 20px 0px;
-  width: 23%;
+/*  margin: 0px 20px 20px 0px;*/
+  width: 230px;
   background-color: #FFFFFF;
   border-radius: 5px;
   border: solid 2px #d4d2d8; 
@@ -250,7 +258,41 @@ section .photo {
   background: url(assests/favorite-active.svg) right center no-repeat;
 }
 
-
+@media screen and (max-width: 665px) {
+  main {
+    grid-template-columns: 0fr 3fr 0fr;
+  }
+  .button-corral {
+    flex-direction: column;    
+  }
+  .buttons {
+    width: 100%;
+  }
+  header {
+    padding: 0px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-title {
+    font-size: 1.58em;
+    padding: 0px;
+    margin: 20px 0px 0px 0px;
+  }
+  .search-form {
+    width: 230px;
+    padding: 0px;
+    margin: 20px 0px 0px 0px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  main {
+    grid-template-columns: 1.5fr 3fr 1.5fr;
+  }
+  header {
+    padding: 0px 100px;
+  }
+}
 /*
 
 .title {

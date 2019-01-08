@@ -52,8 +52,6 @@ function createElement(e) {
     reader.readAsDataURL(input.files[0]); 
     reader.onload = addCard
   }
-  titleCount.innerText = '';
-  captionCount.innerText = '';
 }
 
 function addCard(e) {
@@ -64,6 +62,8 @@ function addCard(e) {
 }
 
 function clearInputs () {
+  titleCount.innerText = '';
+  captionCount.innerText = '';
   title.value = '';
   caption.value = '';
   input.value = '';
