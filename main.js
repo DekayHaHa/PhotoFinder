@@ -10,6 +10,7 @@ var show = document.querySelector('.show');
 var favorites = document.querySelector('.favorites');
 var titleCount = document.querySelector('.title-count');
 var captionCount = document.querySelector('.caption-count');
+
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 var favoriteArray = [];
@@ -205,7 +206,7 @@ function pCount (e) {
 function checkAlbum () {
   if (cardArr.length === 0) {
     cardSection.insertAdjacentHTML('afterbegin', 
-      `<h2>Please Add an Image</h2>`)
+      `<h2>Please Add Image</h2>`)
   }
 }
 

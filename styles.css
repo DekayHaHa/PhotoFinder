@@ -14,11 +14,6 @@ body {
   background-color: #c2b2b4;
 }
 
-.display-mode-none {
-  display: none;
-}
-
-/* nav bar */
 header {
   background-color: #3e2a35;
   display: flex;
@@ -56,7 +51,7 @@ header img {
   border: none;
 }
 
-.search-button:hover {
+button:hover {
   cursor: pointer;
 }
 
@@ -65,7 +60,6 @@ header img {
   padding: 6px;
 }
 
-/* create new card section */
 main {
   background-color: #3e2a35;
   display: grid;
@@ -148,12 +142,10 @@ label {
 }
 
 .file-label:hover {
-  cursor: pointer;
   background-color: #938284;
 }
 
 .buttons:hover {
-  cursor: pointer;
   background-color: #938284;
 }
 
@@ -165,17 +157,10 @@ label {
   background-color: #808080;
 }
 
-
-/*.reset-button {
-  background-color: #afa5cd;
-  width: 25%;
-}*/
-
 .button-corral {
   display: flex;
   justify-content: space-between;
 }
-/* card section */
 
 .card-section h2 {
   margin: auto;
@@ -189,10 +174,6 @@ label {
   grid-gap: 20px 20px;
   grid-template-columns: repeat(auto-fit, 230px);
   grid-template-rows: auto;
-
-/*  display: flex;
-  flex-wrap: wrap;*/
-  /*grid-row-gap: 20px;*/
   padding: 0px 45px;
   margin: 20px 0px 20px 0px;
 }
@@ -201,7 +182,6 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-/*  margin: 0px 20px 20px 0px;*/
   width: 230px;
   background-color: #FFFFFF;
   border-radius: 5px;
@@ -222,12 +202,12 @@ label {
 section .photo {
   margin: -5px;
 }
+
 .photo img {
   width: 100%;
   height: 240px;
   object-fit: contain;
 }
-
 
 .caption {
   height: 50px;
@@ -291,6 +271,7 @@ section .photo {
     font-size: 1.35em;
   }
 }
+
 @media screen and (min-width: 1200px) {
   main {
     grid-template-columns: 1.5fr 3fr 1.5fr;
@@ -299,59 +280,3 @@ section .photo {
     padding: 0px 100px;
   }
 }
-/*
-
-.title {
-  color: #6E646B;
-  font-weight: 800;
-  outline: none;
-  padding: 10px 0px 0px 10px;
-  height: 38px;
-  overflow: scroll;
-}
-
-.quality-text {
-  color: #6E646B;
-  font-weight: 600;
-}
-
-.body {
-  color: #7C7879;
-  font-weight: 300;
-  margin: 10px;
-  max-height: 36px;
-  outline: none;
-  overflow: scroll;
-  padding: 1px;
-  height: 55px;
-}
-
-
-.vote {
-  align-items: center;
-  display: flex;
-}
-
-.delete, 
-.downvote, 
-.upvote {
-  height: 18px;
-  margin-right: 10px;
-  width: 18px;
-}
-
-.delete {
-  align-items: center;
-}
-
-.downvote {
-  margin-left: 10px;
-}
-
-.delete:hover, 
-.downvote:hover, 
-.upvote:hover {
-  cursor: pointer;
-}
-
-*/
