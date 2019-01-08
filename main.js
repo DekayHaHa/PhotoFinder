@@ -43,6 +43,7 @@ function checkTen () {
 function showCards (array) {
   clearCards();
   array.forEach(card => newCard(card));
+  checkAlbum();
 }
 
 function createElement(e) {
@@ -166,7 +167,6 @@ function detectArray (e) {
 }
 
 function searchFilter (array, e) {
-  // favorites.innerText === "Show All" ? arrayToFilter = favoriteArray : arrayToFilter = cardArr;
   let inputText = e.target.value.toLowerCase();
   let filteredArray = array.filter(function(card) {
       return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
@@ -198,6 +198,14 @@ function pCount (e) {
   length > 0 ? captionCount.innerText = ` | Character Count ${length}` : captionCount.innerText = '';
   length > 60 ? captionCount.classList.add('over') : captionCount.classList.remove('over');
   if (length > 60) create.disabled = true;
+}
+
+function checkAlbum () {
+  if (cardArr.length === 0) {
+    console.log('heyo');
+    // cardSection.insertAdjacentHTML('afterbegin', 
+    //   ``)
+  }
 }
 
 //14
