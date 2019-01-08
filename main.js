@@ -60,11 +60,13 @@ function addCard(e) {
   const card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
   cardArr.push(card)
   card.saveToStorage(cardArr);
-  checkTen();
+  checkTen(), clearInputs(), enableButton();
+}
+
+function clearInputs () {
   title.value = '';
   caption.value = '';
   input.value = '';
-  enableButton();
 }
 
 function newCard(card) {
@@ -202,9 +204,8 @@ function pCount (e) {
 
 function checkAlbum () {
   if (cardArr.length === 0) {
-    console.log('heyo');
-    // cardSection.insertAdjacentHTML('afterbegin', 
-    //   ``)
+    cardSection.insertAdjacentHTML('afterbegin', 
+      `<h2>Please Add an Image</h2>`)
   }
 }
 

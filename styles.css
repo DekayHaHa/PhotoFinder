@@ -176,7 +176,9 @@ label {
   padding: 4px 0px;
 }
 /* card section */
-
+.card-section h2 {
+  margin: auto;
+}
 .card-section {
   display: flex;
   flex-wrap: wrap;
