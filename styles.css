@@ -92,6 +92,10 @@ label {
   height: 8vh;
 }
 
+.over {
+  color: red;
+}
+
 .inputs {
   border: solid 1px #d4d2d8;
   border-radius: 5px;
@@ -200,16 +204,18 @@ label {
 
 .card h3 {
   height: 30px;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 section .photo {
   margin: -5px;
 }
 .photo img {
-  max-width:100%;
+  width: 100%;
   height: 240px;
+  object-fit: contain;
 }
+
 
 .caption {
   height: 50px;

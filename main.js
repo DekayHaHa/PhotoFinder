@@ -8,7 +8,8 @@ var cardSection = document.querySelector(".card-section");
 var search = document.getElementById('search-input');
 var show = document.querySelector('.show');
 var favorites = document.querySelector('.favorites');
-
+var titleCount = document.querySelector('.title-count');
+var captionCount = document.querySelector('.caption-count');
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
 var favoriteArray = [];
@@ -23,6 +24,7 @@ search.addEventListener('keyup', detectArray);
 show.addEventListener('click', showButton);
 title.addEventListener('keyup', enableButton);
 input.addEventListener('change', enableButton);
+caption.addEventListener('keyup', pCount);
 
 function appendCards(array) {
   cardArr = []
@@ -49,6 +51,8 @@ function createElement(e) {
     reader.readAsDataURL(input.files[0]); 
     reader.onload = addCard
   }
+  titleCount.innerText = '';
+  captionCount.innerText = '';
 }
 
 function addCard(e) {
@@ -90,7 +94,6 @@ function buttonCheck (e) {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const targetButton = e.target.className
-  // console.log(targetButton);
   if (targetButton === 'trash') deleteCard(cardId, index);
   if (targetButton === 'heart-true' || targetButton === 'heart-false') {
     favoriteUpdate(targetButton, index);
@@ -142,11 +145,13 @@ function enterKey (e) {
 
 function textChange (e) {
   e.preventDefault();
+  if (event.target.className !== 'trash') {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
   let newText = event.target.innerText;
   cardArr[index].updateCard(newText, category);
+  }
 }
 
 function detectArray (e) {
@@ -175,9 +180,34 @@ function showButton (e) {
   show.innerText === "Show More" ? show.innerText = "Show Less" : show.innerText = "Show More";
 }
 
-function enableButton() {
+function enableButton(e) {
   const titleLen = title.value.length;
   titleLen && input.files[0] ? create.disabled = false : create.disabled = true;
+  if (e.target.id === 'title-input') h3Count(e); 
+}
+
+function h3Count (e) {
+  let length = e.target.value.length
+  length > 0 ? titleCount.innerText = ` | Character Count ${length}` : titleCount.innerText = '';
+  if (length > 18) {
+    titleCount.classList.add('over');
+    create.disabled = true;
+  } else {
+    titleCount.classList.remove('over');
+    // create.disabled = false;
+  }
+}
+
+function pCount (e) {
+  let length = e.target.value.length
+  length > 0 ? captionCount.innerText = ` | Character Count ${length}` : captionCount.innerText = '';
+  if (length > 60) {
+    captionCount.classList.add('over');
+    create.disabled = true;
+  } else {
+    captionCount.classList.remove('over');
+    // create.disabled = false;
+  }
 }
 
 //14
