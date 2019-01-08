@@ -179,6 +179,8 @@ label {
 
 .card-section h2 {
   margin: auto;
+  width: 400px;
+  margin-left: -10px;
 }
 
 .card-section {
@@ -283,6 +285,10 @@ section .photo {
     width: 230px;
     padding: 0px;
     margin: 20px 0px 0px 0px;
+  }
+  .card-section h2 {
+    margin-left: 0px;
+    font-size: 1.35em;
   }
 }
 @media screen and (min-width: 1200px) {
