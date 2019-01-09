@@ -1,4 +1,4 @@
-# ideaBoxDoubles
+# Photo Finder
 
 ### By Devin Kapla
 
@@ -12,12 +12,14 @@ CSS
 Javascript
 
 ### Build status
-- Complete
+- Phase 1, 2, and 3 Complete
 
 ### First Update
+- Update image functionality 
 - Refactor into single action functions
-- User testing
-
+- User testing/bug fixes
+- Adjust card size for a common photo size 
+- Add animations
 
 ## Current look/Usage example
 
