@@ -52,8 +52,7 @@ function createElement(e) {
   if (input.files[0]) {
     reader.readAsDataURL(input.files[0]); 
     reader.onload = addCard
-  }
-}
+}}
 
 function addCard(e) {
   const card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
@@ -97,8 +96,7 @@ function buttonCheck (e) {
   if (targetButton === 'trash') deleteCard(cardId, index);
   if (targetButton === 'heart-true' || targetButton === 'heart-false') {
     favoriteUpdate(targetButton, index);
-  }
-}
+}}
 
 function deleteCard(thisId, index) {
   cardArr[index].deleteFromStorage(index, cardArr);
@@ -126,8 +124,7 @@ function favDisplatBtn () {
   } else {
     show.disabled = false;
     favoriteAmount(), checkTen();
-  }
-}
+}}
  
 function favoriteAmount () {
   let amount = 0;
@@ -150,8 +147,7 @@ function textChange (e) {
   const index = cardArr.findIndex(card => card.id === cardId);
   let newText = event.target.innerText;
   cardArr[index].updateCard(newText, category);
-  }
-}
+}}
 
 function detectArray (e) {
   e.preventDefault();
@@ -197,5 +193,4 @@ function pCount (e) {
 function checkAlbum () {
   if (cardArr.length === 0) {
     cardSection.innerHTML = '<h2>Please Add Image</h2>';
-  }
-}
+}}
