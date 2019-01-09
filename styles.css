@@ -41,7 +41,6 @@ header img {
 #search-input {
   border: none;
   color: #8A8494;
-  height: 4vh;
   width: 100%;
 }
 
@@ -68,9 +67,10 @@ label {
   padding-top: 20px;
 }
 
+#search-input ,
 #caption-input,
 #title-input {
-  height: 4vh;
+  height: 2em;
 }
 
 .over {
@@ -90,7 +90,7 @@ label {
   color: #FFFFFF;
   font-size: .75em;
   font-weight: 700;
-  height: 5vh;
+  height: 2.5em;
   letter-spacing: 1px;
   margin-bottom: 20px;
   padding: 0px 5px;
@@ -117,7 +117,7 @@ label {
   color: #FFFFFF;
   display: flex;
   font-size: .75em;
-  height: 5vh;
+  height: 2.5em;
   justify-content: space-around;
   letter-spacing: 1px;
   margin-bottom: 20px;

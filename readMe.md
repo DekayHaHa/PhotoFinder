@@ -19,22 +19,14 @@ Javascript
 - User testing
 
 
-## Current look
+## Current look/Usage example
 
-![alt text]()
-
-## Usage example
-
-![alt text]()
-
-![alt text]()
+![alt text](comps/use-case-one.png)
 
 ### Mobile
 
-![alt text]()
+![alt text](comps/mobile-use.jpg)
 
 ## Original/provided Comp
 
-![alt text]()
-
-![alt text]()
+![alt text](comp/fotofinder-comp.png)
