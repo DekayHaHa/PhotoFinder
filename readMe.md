@@ -21,12 +21,12 @@ Javascript
 
 ## Current look/Usage example
 
-![alt text](comps/use-case-one.png)
+![alt text](comps/Use-Case-One.png)
 
 ### Mobile
 
-![alt text](comps/mobile-use.jpg)
+![alt text](Comps/mobile-use.jpg)
 
 ## Original/provided Comp
 
-![alt text](comp/fotofinder-comp.png)
+![alt text](Comps/fotofinder-comp.png)
