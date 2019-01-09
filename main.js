@@ -8,8 +8,12 @@ var cardSection = document.querySelector(".card-section");
 var search = document.getElementById('search-input');
 var show = document.querySelector('.show');
 var favorites = document.querySelector('.favorites');
+var titleCount = document.querySelector('.title-count');
+var captionCount = document.querySelector('.caption-count');
+
 var cardArr = JSON.parse(localStorage.getItem('cards')) || [];
 var reader = new FileReader();
+var favoriteArray = [];
 
 favorites.addEventListener('click', favoriteFilter);
 cardSection.addEventListener('click', buttonCheck);
@@ -17,8 +21,11 @@ cardSection.addEventListener('keydown', enterKey);
 cardSection.addEventListener('focusout', textChange);
 window.addEventListener('load', appendCards(cardArr));
 create.addEventListener('click', createElement);
-search.addEventListener('keyup', searchFilter);
-show.addEventListener('click', showButton)
+search.addEventListener('keyup', detectArray);
+show.addEventListener('click', showButton);
+title.addEventListener('keyup', enableButton);
+input.addEventListener('change', enableButton);
+caption.addEventListener('keyup', pCount);
 
 function appendCards(array) {
   cardArr = []
@@ -31,13 +38,13 @@ function appendCards(array) {
 
 function checkTen () {
   const tenArray = cardArr.slice(-10);
-  favoriteAmount();
-  showCards(tenArray);
+  favoriteAmount(), showCards(tenArray);
 }
 
 function showCards (array) {
   clearCards();
   array.forEach(card => newCard(card));
+  checkAlbum();
 }
 
 function createElement(e) {
@@ -52,7 +59,15 @@ function addCard(e) {
   const card = new Card(Date.now(), title.value, caption.value, e.target.result, false);
   cardArr.push(card)
   card.saveToStorage(cardArr);
-  checkTen();
+  checkTen(), clearInputs(), enableButton();
+}
+
+function clearInputs () {
+  titleCount.innerText = '';
+  captionCount.innerText = '';
+  title.value = '';
+  caption.value = '';
+  input.value = '';
 }
 
 function newCard(card) {
@@ -68,8 +83,8 @@ function newCard(card) {
         <p class="caption" contenteditable="true">${card.caption}</p>
       </section>
       <section class="two-buttons">
-        <div class="trash"></div>
-        <div class="heart-${card.favorite.toString()}"></div>
+        <button class="trash"></button>
+        <button class="heart-${card.favorite.toString()}"></button>
       </section>
     </article>`);
 }
@@ -92,30 +107,32 @@ function buttonCheck (e) {
 function deleteCard(thisId, index) {
   cardArr[index].deleteFromStorage(index);
   const wholeCard = document.getElementById(thisId);
-  wholeCard.remove();
-  checkTen();
+  wholeCard.remove(), checkTen();
 }
 
 function favoriteUpdate (name, index) {
-  if (name === 'heart-false') {
-    event.target.classList.replace('heart-false','heart-true');
-    cardArr[index].updateCard(true);
-  } else if (name === 'heart-true') {
-    event.target.classList.replace('heart-true', 'heart-false');
-    cardArr[index].updateCard(false);
-  }
+  name === 'heart-false' ? event.target.classList.replace('heart-false','heart-true') : cardArr[index].updateCard(false);
+  name === 'heart-false' ? cardArr[index].updateCard(true) : event.target.classList.replace('heart-true', 'heart-false');
+  // if (name === 'heart-false') {
+  //   event.target.classList.replace('heart-false','heart-true');
+  //   cardArr[index].updateCard(true);
+  // } else if (name === 'heart-true') {
+  //   event.target.classList.replace('heart-true', 'heart-false');
+  //   cardArr[index].updateCard(false);
+  // }
   favoriteAmount();
 }
 
 function favoriteFilter (e) {
   e.preventDefault();
-  const favoriteArray = cardArr.filter(card => card.favorite === true);
+  favoriteArray = cardArr.filter(card => card.favorite === true);
   showCards(favoriteArray);
   if (favorites.innerText[8]) {
     favorites.innerText = "Show All";
+    show.disabled = true;
   } else {
-    favoriteAmount();
-    checkTen();
+    show.disabled = false;
+    favoriteAmount(), checkTen();
   }
 }
  
@@ -128,27 +145,31 @@ function favoriteAmount () {
 }
 
 function enterKey (e) {
-  e.preventDefault();
   const key = event.keyCode;
   if (key === 13) textChange(e);
 }
 
-/////////////FFFFFIIIIIIIIIIXXXXXXXXX\\\\\\\\\\\\\\
-/////////////GARBAGE FIRE!!!!!!!!!!!!\\\\\\\\\\\\\\
 function textChange (e) {
   e.preventDefault();
+  if (event.target.className !== 'trash') {
   const cardId = parseInt(e.target.parentElement.parentElement.id)
   const index = cardArr.findIndex(card => card.id === cardId);
   const category = e.target.className;
-  // console.log(cardId);
   let newText = event.target.innerText;
-  console.log(category, newText);
   cardArr[index].updateCard(newText, category);
+  }
 }
 
-function searchFilter (e) {
+function detectArray (e) {
+  e.preventDefault();
+  let arrayToFilter = [];
+  favorites.innerText === "Show All" ? arrayToFilter = favoriteArray : arrayToFilter = cardArr;
+  searchFilter(arrayToFilter, e);
+}
+
+function searchFilter (array, e) {
   let inputText = e.target.value.toLowerCase();
-  let filteredArray = cardArr.filter(function(card) {
+  let filteredArray = array.filter(function(card) {
       return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
   })
   showCards(filteredArray);
@@ -160,7 +181,35 @@ function showButton (e) {
   show.innerText === "Show More" ? show.innerText = "Show Less" : show.innerText = "Show More";
 }
 
+function enableButton(e) {
+  const titleLen = title.value.length;
+  titleLen && input.files[0] ? create.disabled = false : create.disabled = true;
+  if (e && e.target.id === 'title-input') h3Count(e); 
+}
 
+function h3Count (e) {
+  let length = e.target.value.length;
+  length > 0 ? titleCount.innerText = ` | Character Count ${length}` : titleCount.innerText = '';
+  length > 18 ? titleCount.classList.add('over') : titleCount.classList.remove('over');
+  if (length > 18) create.disabled = true;
+}
+
+function pCount (e) {
+  let length = e.target.value.length;
+  length > 0 ? captionCount.innerText = ` | Character Count ${length}` : captionCount.innerText = '';
+  length > 60 ? captionCount.classList.add('over') : captionCount.classList.remove('over');
+  if (length > 60) create.disabled = true;
+}
+
+function checkAlbum () {
+  if (cardArr.length === 0) {
+    cardSection.insertAdjacentHTML('afterbegin', 
+      `<h2>Please Add an Image</h2>`)
+  }
+}
+
+//14
+//
 // document.querySelector(".save-button").addEventListener("click", ideaClass);
 // document.querySelector('.filter-buttons-section').addEventListener('click', buttonDetect);
 // window.addEventListener("load", cardPersist);
