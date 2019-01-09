@@ -14,6 +14,7 @@ body {
   background-color: #c2b2b4;
 }
 
+.button-corral,
 header {
   background-color: #3e2a35;
   display: flex;
@@ -50,15 +51,6 @@ header img {
   border: none;
 }
 
-button:hover {
-  cursor: pointer;
-}
-
-.fa-search {
-  color: #FFFFFF;
-  padding: 6px;
-}
-
 main {
   background-color: #3e2a35;
   display: grid;
@@ -77,13 +69,9 @@ label {
   padding-top: 20px;
 }
 
+#caption-input,
 #title-input {
-  border-width: 1px; 
   height: 4vh;
-}
-
-#caption-input {
-  height: 6vh;
 }
 
 .over {
@@ -91,7 +79,6 @@ label {
 }
 
 .inputs {
-  border: solid 1px #d4d2d8;
   margin-bottom: 18px;
   margin-top: 5px;
   outline-color: #afa5cd;
@@ -137,31 +124,19 @@ label {
   margin-bottom: 20px;
 }
 
+.buttons:hover,
 .file-label:hover {
   background-color: #938284;
+  cursor: pointer;
 }
 
-.buttons:hover {
-  background-color: #938284;
-}
-
+.show:disabled,
 .create-new:disabled {
   background-color: #808080;
 }
 
-.show:disabled {
-  background-color: #808080;
-}
-
-.button-corral {
-  display: flex;
-  justify-content: space-between;
-}
-
 .card-section h2 {
-  margin-left: -10px;
-  margin: auto;
-  width: 400px;
+  text-align: center;
 }
 
 .card-section {
@@ -181,7 +156,6 @@ label {
   flex-direction: column;
   height: 400px;
   justify-content: space-between;
-  min-width: 230px;
   width: 230px;
 }
 

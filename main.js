@@ -196,6 +196,6 @@ function pCount (e) {
 
 function checkAlbum () {
   if (cardArr.length === 0) {
-    cardSection.innerHTML = '<h2>Please Add an Image</h2>';
+    cardSection.innerHTML = '<h2>Please Add Image</h2>';
   }
 }
