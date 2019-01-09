@@ -21,7 +21,7 @@ Javascript
 
 ## Current look/Usage example
 
-![alt text](comps/Use-Case-One.png)
+![alt text](Comps/Use-Case-One.png)
 
 ### Mobile
 
