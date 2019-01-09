@@ -111,13 +111,15 @@ function deleteCard(thisId, index) {
 }
 
 function favoriteUpdate (name, index) {
-  if (name === 'heart-false') {
-    event.target.classList.replace('heart-false','heart-true');
-    cardArr[index].updateCard(true);
-  } else if (name === 'heart-true') {
-    event.target.classList.replace('heart-true', 'heart-false');
-    cardArr[index].updateCard(false);
-  }
+  name === 'heart-false' ? event.target.classList.replace('heart-false','heart-true') : cardArr[index].updateCard(false);
+  name === 'heart-false' ? cardArr[index].updateCard(true) : event.target.classList.replace('heart-true', 'heart-false');
+  // if (name === 'heart-false') {
+  //   event.target.classList.replace('heart-false','heart-true');
+  //   cardArr[index].updateCard(true);
+  // } else if (name === 'heart-true') {
+  //   event.target.classList.replace('heart-true', 'heart-false');
+  //   cardArr[index].updateCard(false);
+  // }
   favoriteAmount();
 }
 
@@ -161,11 +163,7 @@ function textChange (e) {
 function detectArray (e) {
   e.preventDefault();
   let arrayToFilter = [];
-  if (favorites.innerText === "Show All") {
-    arrayToFilter = favoriteArray;
-  } else {
-    arrayToFilter = cardArr;
-  }
+  favorites.innerText === "Show All" ? arrayToFilter = favoriteArray : arrayToFilter = cardArr;
   searchFilter(arrayToFilter, e);
 }
 
@@ -206,7 +204,7 @@ function pCount (e) {
 function checkAlbum () {
   if (cardArr.length === 0) {
     cardSection.insertAdjacentHTML('afterbegin', 
-      `<h2>Please Add Image</h2>`)
+      `<h2>Please Add an Image</h2>`)
   }
 }
 
