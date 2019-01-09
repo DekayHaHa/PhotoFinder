@@ -29,7 +29,7 @@ input.addEventListener('change', enableButton);
 
 function appendCards(array) {
   cardArr = []
-  array.forEach(function (obj) {
+  array.forEach(obj => {
     const card = new Card(obj.id, obj.title, obj.caption, obj.image, obj.favorite);
     cardArr.push(card);
   })
@@ -158,7 +158,7 @@ function detectArray (e) {
 
 function searchFilter (array, e) {
   let inputText = e.target.value.toLowerCase();
-  let filteredArray = array.filter(function(card) {
+  let filteredArray = array.filter(card => {
       return card.title.toLowerCase().includes(inputText) || card.caption.toLowerCase().includes(inputText);
   })
   showCards(filteredArray);
