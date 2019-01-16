@@ -10,6 +10,7 @@
 HTML
 CSS
 Javascript
+JQuery
 
 ### Build status
 - Phase 1, 2, and 3 Complete
